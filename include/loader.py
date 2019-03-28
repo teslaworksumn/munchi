@@ -6,7 +6,7 @@
 
 import os
 
-class Loader
+class Loader:
 
   def __init__(self):
     self.name = "loader"
