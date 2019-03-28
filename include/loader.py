@@ -8,5 +8,5 @@ import os
 
 class Loader
 
-	def __init__(self):
-		self.name = "loader"
+  def __init__(self):
+    self.name = "loader"
