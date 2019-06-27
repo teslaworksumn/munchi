@@ -6,22 +6,25 @@
 
 import os
 #from include.listener import Listener
-from include.loader import Loader
+#from include.loader import Loader
+from include.googleiot import Client
 import time
 
 def engine():
     print("Running engine.py")
 
-    myLoader = Loader()
+    client = Client('dev_munchi')
 
-    myLoader.setServoAngle(18,10)
-    time.sleep(5)
-    myLoader.setServoAngle(13,29)
-    time.sleep(5)
-    myLoader.setServoAngle(18, 30)
-    myLoader.setServoAngle(13, 10)
+    #myLoader = Loader()
 
-    print("Finished running engine.py")
+    #myLoader.setServoAngle(18,10)
+    #time.sleep(5)
+    #myLoader.setServoAngle(13,29)
+    #time.sleep(5)
+    #myLoader.setServoAngle(18, 30)
+    #myLoader.setServoAngle(13, 10)
+
+    #print("Finished running engine.py")
 
     #mqttc = Listener()
     #rc = mqttc.run()
