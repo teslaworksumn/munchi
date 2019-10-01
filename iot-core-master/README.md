@@ -1,3 +1,5 @@
+# **Link to Using Cloud IoT Core gateways with a Raspberry Pi Tutorial:** https://cloud.google.com/community/tutorials/cloud-iot-gateways-rpi
+
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # Google Cloud Platform Community [![Slack][slack_badge]][slack_link] [![Build][build_badge]][build_link]
