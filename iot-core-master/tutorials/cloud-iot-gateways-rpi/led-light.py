@@ -21,10 +21,10 @@ import RPi.GPIO as GPIO
 from colors import bcolors
 
 
-LED_IOPIN = 14
+RELAY_IOPIN = 14
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(LED_IOPIN, GPIO.OUT)
+GPIO.setup(RELAY_IOPIN, GPIO.OUT)
 
 ADDR = ''
 PORT = 10000
@@ -74,21 +74,21 @@ def RunAction(action, data=''):
 try:
     RunAction('detach')
     RunAction('attach')
-    RunAction('event', 'LED is online')
+    RunAction('event', 'RELAY is online')
     RunAction('subscribe')
 
     while True:
         response = client_sock.recv(4096).decode('utf8')
         print('Client received {}'.format(response))
         if response.upper() == 'ON' or response.upper() == b'ON':
-            GPIO.output(LED_IOPIN, GPIO.HIGH)
+            GPIO.output(RELAY_IOPIN, GPIO.HIGH)
             sys.stdout.write('\r>> ' + bcolors.OKGREEN + bcolors.CBLINK +
-                             " LED is ON " + bcolors.ENDC + ' <<')
+                             " RELAY is ON " + bcolors.ENDC + ' <<')
             sys.stdout.flush()
         elif response.upper() == "OFF" or response.upper() == b'OFF':
-            GPIO.output(LED_IOPIN, GPIO.LOW)
+            GPIO.output(RELAY_IOPIN, GPIO.LOW)
             sys.stdout.write('\r >>' + bcolors.CRED + bcolors.BOLD +
-                             ' LED is OFF ' + bcolors.ENDC + ' <<')
+                             ' RELAY is OFF ' + bcolors.ENDC + ' <<')
             sys.stdout.flush()
         else:
             print('Invalid message {}'.format(response))

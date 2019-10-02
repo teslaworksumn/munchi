@@ -14,7 +14,7 @@ This tutorial shows you how to set up and use gateways on Cloud IoT Core. From t
 "gateway is a device that connects less capable devices to Cloud IoT Core and performs several tasks on the device's behalf,
 such as communication, authentication, storage, and processing."
 
-In this tutorial, you will create a gateway that manages two devices: a simple LED and a DHT22 sensor. Neither device will
+In this tutorial, you will create a gateway that manages two devices: a simple RELAY and a DHT22 sensor. Neither device will
 be directly connected to Cloud IoT Core, but will receive updates from and publish telemetry events to the cloud through the
 gateway.
 
@@ -60,7 +60,7 @@ This tutorial should not generate any usage that would not be covered by the fre
 - MicroUSB to USB-A cable
 - Monitor with HDMI input
 - HDMI cable
-- LED
+- RELAY
 - [Adafruit DHT22 Temperature/Humidity Sensor](https://www.adafruit.com/product/385)
 - 10k Ohm resistor
 - Breadboard and jumper wires
@@ -151,7 +151,7 @@ To set up your gateway:
 
 ## Raspberry Pi setup
 
-In this tutorial, you'll use a [Raspberry Pi*][rpi] to manage the LED/temperature sensor. Devices will connect to the gateway device through [UDP sockets][udp-socket] over a local network, which will connect to Cloud IoT Core via the [MQTT bridge][mqtt-bridge]. The Raspberry Pi is not really a constrained device since it has IP connectivity and the ability to sign JWTs, so its use here is mostly for demonstration purposes.
+In this tutorial, you'll use a [Raspberry Pi*][rpi] to manage the RELAY/temperature sensor. Devices will connect to the gateway device through [UDP sockets][udp-socket] over a local network, which will connect to Cloud IoT Core via the [MQTT bridge][mqtt-bridge]. The Raspberry Pi is not really a constrained device since it has IP connectivity and the ability to sign JWTs, so its use here is mostly for demonstration purposes.
 
 1.  [Download Raspbian][raspbian-download] (the full image with Desktop and recommended software) and
     follow [the installation guide][raspbian-installation] to flash Raspbian onto your microSD card.
@@ -192,7 +192,7 @@ In this tutorial, you'll use a [Raspberry Pi*][rpi] to manage the LED/temperatur
 
 ## Managing devices through config updates
 
-Next, you will manage an LED light connected to the gateway through Cloud IoT Core config updates.
+Next, you will manage an RELAY light connected to the gateway through Cloud IoT Core config updates.
 
 1.  Switch to your browser and open the [Cloud IoT Core console][cloud-iot].
 2.  Click on the registry you created. The gateway you created should be listed in this registry.
@@ -210,21 +210,21 @@ Next, you will manage an LED light connected to the gateway through Cloud IoT Co
     ![bind device to gateway](https://storage.googleapis.com/gcp-community/tutorials/cloud-iot-gateways-rpi/bind-device.png)
 
 7.  Edit `led-light.py` by adding the IP address of your gateway on line 28 `ADDR = ''`.
-8.  Connect the LED to the Raspberry Pi's [GPIO Pin 14][rpi-gpio] and ground using an appropriate resistor.
+8.  Connect the RELAY to the Raspberry Pi's [GPIO Pin 14][rpi-gpio] and ground using an appropriate resistor.
 9.  Ensure the gateway Python sample is still running on your desktop or laptop.
 10. Run the following from your terminal on the Raspberry Pi:
 
         source run-led-light
 
-11. Make sure you see the `>>LED IS OFF<<` message
+11. Make sure you see the `>>RELAY IS OFF<<` message
 12. Switch back to a browser and go to the [Cloud IoT Core console][cloud-iot].
 13. Select your registry, and then select `led-light`.
 14. Click **Update Config** at the top of the page.
-15. In the configuration text area, enter `ON` or `OFF` to toggle the LED state.
+15. In the configuration text area, enter `ON` or `OFF` to toggle the RELAY state.
 
     ![udpate config](https://storage.googleapis.com/gcp-community/tutorials/cloud-iot-gateways-rpi/update-config.png)
 
-    These are preconfigured valid states the LED will respond to, defined in `led-light.py`. Sending configuration updates from the Cloud IoT Core console toggles the LED device through the gateway device.
+    These are preconfigured valid states the RELAY will respond to, defined in `led-light.py`. Sending configuration updates from the Cloud IoT Core console toggles the RELAY device through the gateway device.
 
 [rpi-gpio]: https://www.raspberrypi.org/documentation/usage/gpio/
 
@@ -261,7 +261,7 @@ In this section, you will set up a DHT22 sensor to send telemetry from the senso
 
         gcloud pubsub subscriptions pull my-subscription --auto-ack --limit=100
 
-The topic should have received a lot of messages from both the LED and DHT22. In practice, services that ingest data from Pub/Sub should process that data in regular intervals as telemetry events are published.
+The topic should have received a lot of messages from both the RELAY and DHT22. In practice, services that ingest data from Pub/Sub should process that data in regular intervals as telemetry events are published.
 
 [pub-sub]: https://console.cloud.google.com/cloudpubsub
 
